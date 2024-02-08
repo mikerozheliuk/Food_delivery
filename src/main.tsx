@@ -10,7 +10,7 @@ import {
 import { Menu } from "./pages/Menu/Menu";
 import { Cart } from "./pages/Cart/Cart";
 import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
-import { Layout } from "./layout/Menu/Menu";
+import { Layout } from "./layout/Menu/Layout";
 
 const router = createBrowserRouter([
   {

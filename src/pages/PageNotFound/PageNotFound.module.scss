@@ -126,6 +126,7 @@
     transform: rotate(0);
   }
 }
+
 @keyframes left-ear {
   0% {
     transform: rotate(6deg);
@@ -164,6 +165,7 @@
     transform: rotateZ(6deg);
   }
 }
+
 @keyframes right-ear {
   0% {
     transform: rotateZ(-16deg) rotateY(180deg);
@@ -232,16 +234,6 @@
     transform: rotateZ(-16deg) rotateY(180deg);
   }
 }
-*,
-*:before,
-*:after {
-  animation-timing-function: cubic-bezier(
-    0.645,
-    0.045,
-    0.355,
-    1
-  ) !important;
-}
 
 .husky {
   height: 60vmin;
@@ -263,12 +255,6 @@
   top: calc(100% + 0.5vmin);
   z-index: 3;
   background: #4f8edb;
-}
-div:before,
-div:after {
-  content: "";
-  display: block;
-  position: absolute;
 }
 .head {
   animation: head 12s none infinite;
@@ -624,6 +610,13 @@ div:after {
 }
 
 .main {
+  div:before,
+  div:after {
+    content: "";
+    display: block;
+    position: absolute;
+  }
+
   overflow: hidden;
   background-repeat: no-repeat;
   background-size: contain;
@@ -634,7 +627,7 @@ div:after {
   align-items: center;
   background-color: #4f8edb;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
 
