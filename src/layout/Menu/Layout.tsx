@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import cn from "classnames";
 
 import styles from "./Layout.module.scss";
-import Button from "../../components/Button/Button";
+import Button from "../../components/ Button/Button";
 
 export function Layout() {
   return (
@@ -57,7 +57,7 @@ export function Layout() {
           Exit
         </Button>
       </div>
-      <div>
+      <div className={styles.content}>
         <Outlet />
       </div>
     </div>
