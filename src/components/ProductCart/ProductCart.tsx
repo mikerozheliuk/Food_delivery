@@ -4,7 +4,10 @@ import { ProductCartProps } from "./ProductCart.props";
 
 function ProductCart(props: ProductCartProps) {
   return (
-    <Link to={"/"} className={styles.link}>
+    <Link
+      to={`/product/${props.id}`}
+      className={styles.link}
+    >
       <div className={styles.card}>
         <div
           className={styles.card__head}
@@ -26,7 +29,7 @@ function ProductCart(props: ProductCartProps) {
         </div>
         <div className={styles.card__footer}>
           <div className={styles.card__title}>
-            {props.title}
+            {props.name}
           </div>
 
           <div className={styles.card__description}>
