@@ -1,5 +1,16 @@
 .head {
   display: flex;
-
   justify-content: space-between;
+  &:not(:last-child) {
+    padding-bottom: 30px;
+  }
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(360px, 1fr)
+  );
+  gap: 15px;
 }
