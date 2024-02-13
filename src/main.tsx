@@ -5,18 +5,22 @@ import "./index.css";
 import {
   RouterProvider,
   createBrowserRouter,
+  defer,
 } from "react-router-dom";
 
 import axios from "axios";
 
 import { Cart } from "./pages/Cart/Cart";
 
-import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
+import { Login } from "./pages/Login/Login";
 import { Product } from "./pages/Product/Product";
+import { Register } from "./pages/Register/Register";
+import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
 
-import { Layout } from "./layout/Menu/Layout";
 import { PREFIX } from "./helpers/API";
+import { Layout } from "./layout/Menu/Layout";
 import { Spinner } from "./components/Spinner/Spinner";
+import { AuthLayout } from "./layout/Auth/AuthLayout";
 
 const Menu = lazy(() => import("./pages/Menu/Menu"));
 
@@ -42,20 +46,34 @@ const router = createBrowserRouter([
         element: <Product />,
         errorElement: <>Помилка</>,
         loader: async ({ params }) => {
-          await new Promise<void>((resolve) => {
-            setTimeout(() => {
-              resolve();
-            }, 2000);
+          return defer({
+            data: new Promise((resolve, reject) => {
+              setTimeout(() => {
+                axios
+                  .get(`${PREFIX}/products/${params.id}`)
+                  .then((data) => resolve(data))
+                  .catch((e) => reject(e));
+              }, 2000);
+            }),
           });
-          const { data } = await axios.get(
-            `${PREFIX}/products/${params.id}`
-          );
-          return data;
         },
       },
     ],
   },
-
+  {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+    ],
+  },
   {
     path: "*",
     element: <PageNotFound />,
