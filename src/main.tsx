@@ -11,23 +11,29 @@ import {
 import axios from "axios";
 
 import { Cart } from "./pages/Cart/Cart";
-
 import { Login } from "./pages/Login/Login";
 import { Product } from "./pages/Product/Product";
 import { Register } from "./pages/Register/Register";
 import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
 
 import { PREFIX } from "./helpers/API";
+import { RequireAuth } from "./helpers/RequireAuth";
+
 import { Layout } from "./layout/Menu/Layout";
-import { Spinner } from "./components/Spinner/Spinner";
 import { AuthLayout } from "./layout/Auth/AuthLayout";
+
+import { Spinner } from "./components/Spinner/Spinner";
 
 const Menu = lazy(() => import("./pages/Menu/Menu"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <RequireAuth>
+        <Layout />
+      </RequireAuth>
+    ),
     children: [
       {
         path: "/",
