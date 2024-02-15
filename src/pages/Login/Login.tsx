@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,8 +10,12 @@ import Headling from "../../components/Headling/Headling";
 
 import { PREFIX } from "../../helpers/API";
 
-import styles from "./Login.module.scss";
 import { LoginResponse } from "../../interfaces/auth.interface";
+
+import { AppDispath } from "../../store/store";
+import { userActions } from "../../store/user.slice";
+
+import styles from "./Login.module.scss";
 
 export type LoginForm = {
   email: {
@@ -25,6 +30,8 @@ export function Login() {
   const [error, setError] = useState<string | null>();
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispath>();
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -49,6 +56,8 @@ export function Login() {
       );
 
       localStorage.setItem("jwt", data.access_token);
+
+      dispatch(userActions.addJwt(data.access_token));
 
       navigate("/");
     } catch (e) {
