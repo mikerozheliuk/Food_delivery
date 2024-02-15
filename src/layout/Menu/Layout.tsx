@@ -3,17 +3,23 @@ import {
   Outlet,
   useNavigate,
 } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import cn from "classnames";
 
-import styles from "./Layout.module.scss";
 import Button from "../../components/ Button/Button";
+
+import { AppDispath } from "../../store/store";
+import { userActions } from "../../store/user.slice";
+
+import styles from "./Layout.module.scss";
 
 export function Layout() {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispath>();
 
   const logout = () => {
-    localStorage.removeItem("jwt");
+    dispatch(userActions.logout());
     navigate("/auth/login");
   };
 
