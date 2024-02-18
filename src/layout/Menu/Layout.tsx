@@ -3,20 +3,33 @@ import {
   Outlet,
   useNavigate,
 } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import cn from "classnames";
 
 import Button from "../../components/ Button/Button";
 
-import { AppDispath } from "../../store/store";
-import { userActions } from "../../store/user.slice";
+import { AppDispath, RootState } from "../../store/store";
+import {
+  getProfile,
+  userActions,
+} from "../../store/user.slice";
 
 import styles from "./Layout.module.scss";
+
+import { useEffect } from "react";
 
 export function Layout() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispath>();
+
+  const profile = useSelector(
+    (s: RootState) => s.user.profile
+  );
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
 
   const logout = () => {
     dispatch(userActions.logout());
@@ -30,10 +43,10 @@ export function Layout() {
           <div className={styles.user}>
             <img src="/public/user.png" alt="image" />
             <div className={styles.user__name}>
-              Mike Rozh
+              {profile?.name}
             </div>
             <div className={styles.user__mail}>
-              rozh@gmail.com
+              {profile?.email}
             </div>
           </div>
 
