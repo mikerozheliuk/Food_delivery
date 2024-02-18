@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
 import styles from "./ProductCart.module.scss";
 import { ProductCartProps } from "./ProductCart.props";
+import { AppDispath } from "../../store/store";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart.slice";
+import { MouseEvent } from "react";
 
 function ProductCart(props: ProductCartProps) {
+  const dispatch = useDispatch<AppDispath>();
+
+  const add = (e: MouseEvent) => {
+    e.preventDefault();
+    dispatch(cartActions.add(props.id));
+  };
+
   return (
     <Link
       to={`/product/${props.id}`}
@@ -19,7 +30,10 @@ function ProductCart(props: ProductCartProps) {
             {props.price}&nbsp;
             <span className={styles.card__currency}>$</span>
           </div>
-          <button className={styles.card__backet}>
+          <button
+            className={styles.card__backet}
+            onClick={add}
+          >
             <img src="/public/cart-button.svg" alt="img" />
           </button>
           <div className={styles.card__rating}>

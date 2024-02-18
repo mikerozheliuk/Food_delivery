@@ -27,6 +27,8 @@ export function Layout() {
     (s: RootState) => s.user.profile
   );
 
+  const items = useSelector((s: RootState) => s.cart.items);
+
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);
@@ -79,6 +81,10 @@ export function Layout() {
               />
               Basket
             </NavLink>
+            {items.reduce(
+              (acc, item) => (acc += item.count),
+              0
+            )}
           </div>
         </div>
 
