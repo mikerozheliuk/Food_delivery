@@ -80,11 +80,13 @@ export function Layout() {
                 alt="image"
               />
               Basket
+              <span className={styles.cart_count}>
+                {items.reduce(
+                  (acc, item) => (acc += item.count),
+                  0
+                )}
+              </span>
             </NavLink>
-            {items.reduce(
-              (acc, item) => (acc += item.count),
-              0
-            )}
           </div>
         </div>
 
