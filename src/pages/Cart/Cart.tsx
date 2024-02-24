@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
 
+import Button from "../../components/ Button/Button";
 import Headling from "../../components/Headling/Headling";
 import CartItem from "../../components/CartItem/CartItem";
 
 import { Product } from "../../interfaces/product.interface";
 
-import { RootState } from "../../store/store";
+import { cartActions } from "../../store/cart.slice";
+import { AppDispath, RootState } from "../../store/store";
 
 import { PREFIX } from "../../helpers/API";
 
@@ -20,6 +23,9 @@ export function Cart() {
   const [cartProducts, setCardProducts] = useState<Product[]>([]);
 
   const items = useSelector((s: RootState) => s.cart.items);
+  const jwt = useSelector((s: RootState) => s.user.jwt);
+  const dispatch = useDispatch<AppDispath>();
+  const navigate = useNavigate();
 
   const total = items
     .map((i) => {
@@ -39,6 +45,22 @@ export function Cart() {
   const loadAllItems = async () => {
     const res = await Promise.all(items.map((i) => getItem(i.id)));
     setCardProducts(res);
+  };
+
+  const checkout = async () => {
+    await axios.post(
+      `${PREFIX}/order`,
+      {
+        products: items,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    dispatch(cartActions.clean());
+    navigate("/success");
   };
 
   useEffect(() => {
@@ -70,10 +92,18 @@ export function Cart() {
       </div>
       <hr className={styles.hr} />
       <div className={styles.line}>
-        <div className={styles.text}>Всього {items.length} блюда</div>
+        <div className={styles.text}>
+          Всього <span className={styles.totalCount}>{items.length} </span> блюда
+        </div>
         <div className={styles.price}>
           {total + DELIVERY_FEE}&nbsp;<span>$</span>
         </div>
+      </div>
+
+      <div className={styles.checkout}>
+        <Button appearence="big" onClick={checkout}>
+          оформить
+        </Button>
       </div>
     </>
   );

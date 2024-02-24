@@ -12,6 +12,7 @@ import { store } from "./store/store";
 
 import { Cart } from "./pages/Cart/Cart";
 import { Login } from "./pages/Login/Login";
+import { Success } from "./pages/Succes/Succes";
 import { Product } from "./pages/Product/Product";
 import { Register } from "./pages/Register/Register";
 import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             <Menu />
           </Suspense>
         ),
+      },
+      {
+        path: "/success",
+        element: <Success />,
       },
       {
         path: "/cart",
