@@ -1,0 +1,74 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  gap: 30px;
+}
+
+.headButton {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.svg {
+  cursor: pointer;
+}
+
+.cart {
+  padding-top: 50px;
+  display: flex;
+  gap: 50px;
+
+  &__image {
+    height: 165px;
+    width: 320px;
+    border-radius: 15px;
+  }
+
+  &__content {
+    display: grid;
+  }
+
+  &__price {
+    display: flex;
+    gap: 50px;
+  }
+
+  &__currency {
+    color: rgb(151, 150, 161);
+  }
+
+  &__name {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  &__rating {
+    display: flex;
+    gap: 28px;
+  }
+
+  &__wrap_desc {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__description {
+    padding-left: 20px;
+  }
+
+  &__desc_name {
+    color: rgb(91, 91, 94);
+    font-family: Open Sans;
+    font-size: 14.57px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+}

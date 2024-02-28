@@ -1,8 +1,4 @@
-import {
-  NavLink,
-  Outlet,
-  useNavigate,
-} from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import cn from "classnames";
@@ -10,10 +6,7 @@ import cn from "classnames";
 import Button from "../../components/ Button/Button";
 
 import { AppDispath, RootState } from "../../store/store";
-import {
-  getProfile,
-  userActions,
-} from "../../store/user.slice";
+import { getProfile, userActions } from "../../store/user.slice";
 
 import styles from "./Layout.module.scss";
 
@@ -23,9 +16,7 @@ export function Layout() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispath>();
 
-  const profile = useSelector(
-    (s: RootState) => s.user.profile
-  );
+  const profile = useSelector((s: RootState) => s.user.profile);
 
   const items = useSelector((s: RootState) => s.cart.items);
 
@@ -44,12 +35,8 @@ export function Layout() {
         <div className={styles.wrapper}>
           <div className={styles.user}>
             <img src="/public/user.png" alt="image" />
-            <div className={styles.user__name}>
-              {profile?.name}
-            </div>
-            <div className={styles.user__mail}>
-              {profile?.email}
-            </div>
+            <div className={styles.user__name}>{profile?.name}</div>
+            <div className={styles.user__mail}>{profile?.email}</div>
           </div>
 
           <div className={styles.menu}>
@@ -61,10 +48,7 @@ export function Layout() {
                 })
               }
             >
-              <img
-                src="/public/menu-icon.svg"
-                alt="image"
-              />
+              <img src="/public/menu-icon.svg" alt="image" />
               Menu
             </NavLink>
             <NavLink
@@ -75,16 +59,10 @@ export function Layout() {
                 })
               }
             >
-              <img
-                src="/public/cart-icon.svg"
-                alt="image"
-              />
+              <img src="/public/cart-icon.svg" alt="image" />
               Basket
               <span className={styles.cart_count}>
-                {items.reduce(
-                  (acc, item) => (acc += item.count),
-                  0
-                )}
+                {items.reduce((acc, item) => (acc += item.count), 0)}
               </span>
             </NavLink>
           </div>
