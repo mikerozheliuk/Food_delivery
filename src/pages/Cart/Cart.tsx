@@ -23,8 +23,11 @@ export function Cart() {
   const [cartProducts, setCardProducts] = useState<Product[]>([]);
 
   const items = useSelector((s: RootState) => s.cart.items);
+
   const jwt = useSelector((s: RootState) => s.user.jwt);
+
   const dispatch = useDispatch<AppDispath>();
+
   const navigate = useNavigate();
 
   const total = items
@@ -77,6 +80,7 @@ export function Cart() {
         }
         return <CartItem key={product.id} count={i.count} {...product} />;
       })}
+
       <div className={styles.line}>
         <div className={styles.text}>Всього</div>
         <div className={styles.price}>

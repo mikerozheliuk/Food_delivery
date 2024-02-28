@@ -13,7 +13,6 @@ import { store } from "./store/store";
 import { Cart } from "./pages/Cart/Cart";
 import { Login } from "./pages/Login/Login";
 import { Success } from "./pages/Succes/Succes";
-import { Product } from "./pages/Product/Product";
 import { Register } from "./pages/Register/Register";
 import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
 
@@ -24,6 +23,7 @@ import { Layout } from "./layout/Menu/Layout";
 import { AuthLayout } from "./layout/Auth/AuthLayout";
 
 import { Spinner } from "./components/Spinner/Spinner";
+import { Product } from "./pages/Product/Product";
 
 const Menu = lazy(() => import("./pages/Menu/Menu"));
 
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
                   .get(`${PREFIX}/products/${params.id}`)
                   .then((data) => resolve(data))
                   .catch((e) => reject(e));
-              }, 2000);
+              }, 1000);
             }),
           });
         },
